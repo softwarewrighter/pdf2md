@@ -14,7 +14,7 @@ const VERSION_INFO: &str = concat!(
 /// PDF to Markdown converter
 #[derive(Parser, Debug)]
 #[command(name = "pdf2md")]
-#[command(version)]
+#[command(version = VERSION_INFO)]
 #[command(long_version = VERSION_INFO)]
 #[command(about = "Convert PDF documents to Markdown format")]
 #[command(long_about = r#"Convert PDF documents to Markdown format
