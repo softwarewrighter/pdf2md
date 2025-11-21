@@ -48,6 +48,8 @@ graph TB
     style H fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
     style I fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
     style O fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Core Functions
@@ -190,6 +192,8 @@ graph TB
 
     style D fill:#c8e6c9
     style I fill:#e0e0e0
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 **Heading Indicators**:
@@ -267,6 +271,8 @@ sequenceDiagram
     MD->>FS: Write bytes
     FS-->>MD: Write complete
     MD-->>App: Success
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Error Handling

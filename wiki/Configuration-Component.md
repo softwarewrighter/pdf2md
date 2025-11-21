@@ -46,6 +46,8 @@ graph TB
     style D fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
     style O fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
     style J fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Data Structures
@@ -230,6 +232,8 @@ sequenceDiagram
     end
 
     Config-->>App: Result
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Usage Examples

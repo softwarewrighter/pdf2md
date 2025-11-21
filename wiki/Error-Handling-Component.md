@@ -73,6 +73,8 @@ graph TB
     style I fill:#fce4ec,stroke:#c2185b,stroke-width:2px
     style J fill:#fce4ec,stroke:#c2185b,stroke-width:2px
     style K fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Error Types
@@ -294,6 +296,8 @@ sequenceDiagram
         else Valid PDF
             PDF-->>App: Ok(PdfDocument)
             App-->>Main: Ok(())
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
             Main->>Main: Exit 0
         end
     end

@@ -203,6 +203,8 @@ graph TB
     style K fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
     style L fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
     style M fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ### Dependency Rules

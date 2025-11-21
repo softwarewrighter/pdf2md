@@ -46,6 +46,8 @@ graph TB
     style G fill:#fce4ec,stroke:#c2185b,stroke-width:2px
     style L fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
     style N fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## CLI Structure
@@ -263,6 +265,8 @@ sequenceDiagram
     main->>App: run(config)
     App->>App: Process request
     App-->>main: Result
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 
     alt Success
         main->>User: Exit 0

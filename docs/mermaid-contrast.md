@@ -117,13 +117,25 @@ graph TB
     style REST fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
     style MCP fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
     style DB fill:#fffde7,stroke:#f57c00,stroke-width:2px
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
+
+**Critical: Add linkStyle for visible arrows:**
+```
+linkStyle default stroke:#00bcd4,stroke-width:3px
+```
+
+Add this line after all style directives in every mermaid diagram. This makes:
+- **All arrows and connection lines bright cyan** (#00bcd4)
+- **3px thick** for high visibility
+- **Visible on both white and black backgrounds**
 
 **This diagram will:**
 - Show light pastel boxes in light mode with dark text
 - Show light pastel boxes in dark mode with dark text on light backgrounds
 - Have visible colored borders in both modes
-- Have visible arrow/connection lines in both modes
+- Have thick, bright cyan arrows visible in both light and dark modes
 
 ## Automated Color Updates
 

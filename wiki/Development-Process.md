@@ -43,6 +43,8 @@ graph TB
     style H fill:#c8e6c9
     style K fill:#c8e6c9
     style L fill:#bbdefb
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ### Detailed Steps
@@ -153,6 +155,8 @@ graph LR
     style F fill:#ffecb3
     style G fill:#c8e6c9
     style J fill:#bbdefb
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ### 1. Start Development

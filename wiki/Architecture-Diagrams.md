@@ -75,6 +75,8 @@ graph TB
     style O fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
     style P fill:#f5f5f5,stroke:#616161,stroke-width:2px
     style Q fill:#f5f5f5,stroke:#616161,stroke-width:2px
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Crate Dependency Diagram
@@ -94,6 +96,8 @@ graph LR
     style A fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
     style B fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
     style C fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 **Key Points**:
@@ -169,6 +173,8 @@ graph TB
     style E2 fill:#fce4ec,stroke:#c2185b,stroke-width:2px
     style E3 fill:#fce4ec,stroke:#c2185b,stroke-width:2px
     style K fill:#f5f5f5,stroke:#616161,stroke-width:2px
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Data Structure Relationships
@@ -248,6 +254,8 @@ classDiagram
     PdfDocument ..> PdfError : returns
     Pdf2MdError --> PdfError : wraps
     Pdf2MdError --> MarkdownError : wraps
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Processing Pipeline
@@ -290,6 +298,8 @@ flowchart LR
     style O fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
     style Q fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
     style L fill:#f5f5f5,stroke:#616161,stroke-width:2px
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Error Handling Flow
@@ -324,6 +334,8 @@ flowchart TB
     style F fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
     style K fill:#fffde7,stroke:#f57c00,stroke-width:2px
     style M fill:#f5f5f5,stroke:#616161,stroke-width:2px
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Logging Architecture
@@ -362,6 +374,8 @@ flowchart LR
     style E fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
     style K fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
     style L fill:#f5f5f5,stroke:#616161,stroke-width:2px
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Future Extension Points
@@ -413,6 +427,8 @@ graph TB
     style I fill:#fffde7,stroke:#f57c00,stroke-width:2px
     style J fill:#fffde7,stroke:#f57c00,stroke-width:2px
     style K fill:#fffde7,stroke:#f57c00,stroke-width:2px
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Related Pages

@@ -57,6 +57,8 @@ graph TB
     style M fill:#fffde7,stroke:#f57c00,stroke-width:2px
     style P fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
     style E fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Data Structures
@@ -275,6 +277,8 @@ sequenceDiagram
     PDF->>PDF: Combine all text
     PDF->>PDF: Create ExtractedContent
     PDF-->>App: ExtractedContent
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ### Metadata Extraction
@@ -308,6 +312,8 @@ sequenceDiagram
 
     PDF->>PDF: Create PdfMetadata
     PDF-->>App: PdfMetadata
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Error Handling

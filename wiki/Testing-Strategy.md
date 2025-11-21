@@ -26,6 +26,8 @@ graph TB
     style C fill:#c8e6c9
     style B fill:#fff9c4
     style A fill:#ffecb3
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 **Distribution**:
@@ -97,6 +99,8 @@ graph TB
     style D fill:#ffcdd2
     style E fill:#fff9c4
     style J fill:#c8e6c9
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ### Example Unit Tests
@@ -257,6 +261,8 @@ graph TB
     style A fill:#e3f2fd
     style F fill:#c8e6c9
     style H fill:#f5f5f5
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ### Example Integration Tests
@@ -447,6 +453,8 @@ graph LR
     style D fill:#fff9c4
     style F fill:#c8e6c9
     style K fill:#c8e6c9
+
+    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ### TDD Example
