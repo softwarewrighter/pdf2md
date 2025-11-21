@@ -297,7 +297,6 @@ sequenceDiagram
             PDF-->>App: Ok(PdfDocument)
             App-->>Main: Ok(())
 
-    linkStyle default stroke:#00bcd4,stroke-width:3px
             Main->>Main: Exit 0
         end
     end

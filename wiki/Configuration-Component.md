@@ -233,7 +233,6 @@ sequenceDiagram
 
     Config-->>App: Result
 
-    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Usage Examples

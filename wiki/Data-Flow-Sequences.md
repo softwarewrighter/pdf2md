@@ -63,7 +63,6 @@ sequenceDiagram
     else Config Invalid
         Config-->>CLI: InvalidInput Error
 
-    linkStyle default stroke:#00bcd4,stroke-width:3px
         CLI->>User: Error message + Exit 1
     end
 ```
@@ -113,7 +112,6 @@ sequenceDiagram
 
     App-->>CLI: Ok()
 
-    linkStyle default stroke:#00bcd4,stroke-width:3px
     CLI->>User: Exit 0
 ```
 
@@ -137,7 +135,6 @@ sequenceDiagram
     Logger->>Logger: Set level to Info
     Logger-->>App: Logger initialized
 
-    linkStyle default stroke:#00bcd4,stroke-width:3px
 
     App->>Logger: info!("Starting pdf2md")
     Logger->>User: Log: Starting pdf2md
@@ -209,7 +206,6 @@ sequenceDiagram
     CLI->>Error: error_to_exit_code()
     Error-->>CLI: Exit code 4
 
-    linkStyle default stroke:#00bcd4,stroke-width:3px
 
     CLI->>User: Error: PDF processing error: ...
     CLI->>User: Exit 4
@@ -264,7 +260,6 @@ sequenceDiagram
         else No Parent (CWD)
             Validator-->>Config: Ok()
 
-    linkStyle default stroke:#00bcd4,stroke-width:3px
         end
     end
 ```
@@ -302,7 +297,6 @@ sequenceDiagram
     PDF->>PDF: Create ExtractedContent
     PDF-->>App: ExtractedContent{text, page_count}
 
-    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Markdown Generation and Writing Flow
@@ -348,7 +342,6 @@ sequenceDiagram
     FileIO-->>MD: Success
     MD-->>App: Ok()
 
-    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Complete Data Flow Pipeline

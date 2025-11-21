@@ -266,7 +266,6 @@ sequenceDiagram
     App->>App: Process request
     App-->>main: Result
 
-    linkStyle default stroke:#00bcd4,stroke-width:3px
 
     alt Success
         main->>User: Exit 0

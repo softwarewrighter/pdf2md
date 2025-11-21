@@ -272,7 +272,6 @@ sequenceDiagram
     FS-->>MD: Write complete
     MD-->>App: Success
 
-    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Error Handling

@@ -121,12 +121,14 @@ graph TB
     linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
-**Critical: Add linkStyle for visible arrows:**
+**Critical: Add linkStyle for visible arrows (graph/flowchart only):**
 ```
 linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
-Add this line after all style directives in every mermaid diagram. This makes:
+**IMPORTANT:** Only add this to `graph` and `flowchart` diagrams. **DO NOT** add to `sequenceDiagram` - it will cause parse errors.
+
+For graph/flowchart diagrams, add this line after all style directives. This makes:
 - **All arrows and connection lines bright cyan** (#00bcd4)
 - **3px thick** for high visibility
 - **Visible on both white and black backgrounds**
@@ -136,6 +138,27 @@ Add this line after all style directives in every mermaid diagram. This makes:
 - Show light pastel boxes in dark mode with dark text on light backgrounds
 - Have visible colored borders in both modes
 - Have thick, bright cyan arrows visible in both light and dark modes
+
+## Sequence Diagrams
+
+For sequence diagrams, use the neutral theme without linkStyle:
+
+```mermaid
+%%{init: {'theme':'neutral'}}%%
+sequenceDiagram
+    actor User
+    participant System
+
+    User->>System: Request
+    System-->>User: Response
+```
+
+**Sequence diagram notes:**
+- Use `%%{init: {'theme':'neutral'}}%%` for dark mode compatibility
+- **DO NOT use linkStyle** - it's not supported and will cause parse errors
+- Arrow colors are controlled by the theme automatically
+- Solid arrows (`->>`) and dotted arrows (`-->>`) work correctly in neutral theme
+- Both are visible in light and dark modes
 
 ## Automated Color Updates
 

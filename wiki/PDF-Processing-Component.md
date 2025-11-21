@@ -278,7 +278,6 @@ sequenceDiagram
     PDF->>PDF: Create ExtractedContent
     PDF-->>App: ExtractedContent
 
-    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ### Metadata Extraction
@@ -313,7 +312,6 @@ sequenceDiagram
     PDF->>PDF: Create PdfMetadata
     PDF-->>App: PdfMetadata
 
-    linkStyle default stroke:#00bcd4,stroke-width:3px
 ```
 
 ## Error Handling
