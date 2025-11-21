@@ -1,10 +1,21 @@
 use clap::Parser;
 use std::path::PathBuf;
 
+const VERSION_INFO: &str = concat!(
+    env!("CARGO_PKG_VERSION"), "\n",
+    "Copyright (c) 2025 Michael A. Wright\n",
+    "License: MIT\n",
+    "Repository: https://github.com/softwarewrighter/pdf2md\n",
+    "Build Host: ", env!("BUILD_HOST"), "\n",
+    "Build Commit: ", env!("BUILD_COMMIT"), "\n",
+    "Build Time: ", env!("BUILD_TIMESTAMP")
+);
+
 /// PDF to Markdown converter
 #[derive(Parser, Debug)]
 #[command(name = "pdf2md")]
 #[command(version)]
+#[command(long_version = VERSION_INFO)]
 #[command(about = "Convert PDF documents to Markdown format")]
 #[command(long_about = r#"Convert PDF documents to Markdown format
 
