@@ -8,40 +8,40 @@ pdf2md is a command-line tool with a modular architecture that separates concern
 ### Architecture Diagram
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                         User/Shell                          │
-└─────────────────────┬───────────────────────────────────────┘
-                      │
-                      ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    CLI Layer (main.rs)                      │
-│  - Argument parsing (clap)                                  │
-│  - Help/version display                                     │
-│  - Error formatting                                         │
-└─────────────────────┬───────────────────────────────────────┘
-                      │
-                      ▼
-┌─────────────────────────────────────────────────────────────┐
-│               Application Layer (lib.rs)                    │
-│  - Input validation                                         │
-│  - Orchestration                                            │
-│  - Logging coordination                                     │
-│  - Error handling                                           │
-└─────────────┬───────────────────────────┬───────────────────┘
-              │                           │
-              ▼                           ▼
-┌─────────────────────────┐   ┌─────────────────────────────┐
-│  PDF Processing Module  │   │  Markdown Generation Module │
-│  - PDF reading          │   │  - Markdown formatting      │
-│  - Text extraction      │   │  - Structure preservation   │
-│  - Structure parsing    │   │  - File writing             │
-└─────────────────────────┘   └─────────────────────────────┘
-              │                           │
-              └───────────┬───────────────┘
-                          ▼
-                ┌─────────────────────┐
-                │  Filesystem/Output  │
-                └─────────────────────┘
++-------------------------------------------------------------+
+|                         User/Shell                          |
++---------------------+---------------------------------------+
+                      |
+                      v
++-------------------------------------------------------------+
+|                    CLI Layer (main.rs)                      |
+|  - Argument parsing (clap)                                  |
+|  - Help/version display                                     |
+|  - Error formatting                                         |
++---------------------+---------------------------------------+
+                      |
+                      v
++-------------------------------------------------------------+
+|               Application Layer (lib.rs)                    |
+|  - Input validation                                         |
+|  - Orchestration                                            |
+|  - Logging coordination                                     |
+|  - Error handling                                           |
++-------------+---------------------------+-------------------+
+              |                           |
+              v                           v
++-------------------------+   +-----------------------------+
+|  PDF Processing Module  |   |  Markdown Generation Module |
+|  - PDF reading          |   |  - Markdown formatting      |
+|  - Text extraction      |   |  - Structure preservation   |
+|  - Structure parsing    |   |  - File writing             |
++-------------------------+   +-----------------------------+
+              |                           |
+              +-----------+---------------+
+                          v
+                +---------------------+
+                |  Filesystem/Output  |
+                +---------------------+
 ```
 
 ### Module Structure

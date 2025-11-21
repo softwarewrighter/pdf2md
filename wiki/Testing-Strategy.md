@@ -225,12 +225,12 @@ Integration tests are in `tests/` directory:
 
 ```
 tests/
-├── integration_test.rs
-└── fixtures/
-    ├── sample.pdf
-    ├── single_page.pdf
-    ├── not_a_pdf.txt
-    └── empty.pdf
++-- integration_test.rs
++-- fixtures/
+    +-- sample.pdf
+    +-- single_page.pdf
+    +-- not_a_pdf.txt
+    +-- empty.pdf
 ```
 
 ### Integration Test Dependencies
@@ -463,7 +463,7 @@ fn test_validate_missing_input() {
 }
 ```
 
-Run: `cargo test` → Test fails (function doesn't exist)
+Run: `cargo test` -> Test fails (function doesn't exist)
 
 **Step 2: Write Code (GREEN)**
 ```rust
@@ -477,14 +477,14 @@ fn validate_input_path(path: &Path) -> Result<()> {
 }
 ```
 
-Run: `cargo test` → Test passes
+Run: `cargo test` -> Test passes
 
 **Step 3: Refactor**
 - Extract error message to const
 - Add logging
 - Improve error context
 
-Run: `cargo test` → All tests still pass
+Run: `cargo test` -> All tests still pass
 
 **Step 4: Commit**
 ```bash
@@ -562,8 +562,8 @@ View report: `open coverage/index.html`
 
 ### Coverage Requirements
 
-- **Overall**: ≥ 80%
-- **Critical modules**: ≥ 90%
+- **Overall**: >= 80%
+- **Critical modules**: >= 90%
 - **Error handling**: 100%
 
 ### Coverage Report Example
