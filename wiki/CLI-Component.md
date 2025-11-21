@@ -1,11 +1,16 @@
 # CLI Component
 
-The CLI (Command-Line Interface) component handles all user interaction through the command line. It provides argument parsing, help display, and user-facing error messages.
+The CLI (Command-Line Interface) component handles all user interaction through the command line. It provides argument parsing, help display, version metadata, and user-facing error messages.
+
+## Location
+
+**`crates/pdf2md/`** - CLI binary crate
 
 ## Files
 
 - **`src/main.rs`** - Application entry point and process management
 - **`src/cli.rs`** - Argument parsing and CLI structure
+- **`build.rs`** - Build-time metadata capture (host, commit, timestamp)
 
 ## Responsibilities
 
@@ -18,26 +23,29 @@ The CLI (Command-Line Interface) component handles all user interaction through 
 ## Architecture
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
 graph TB
-    A[User Command] --> B[main.rs]
-    B --> C[Args::parse_args]
+    A[User Command] --> B[main.rs<br/>pdf2md crate]
+    B --> C[Args::parse_args<br/>cli.rs]
     C --> D[clap Parser]
     D --> E{Valid Args?}
     E -->|Yes| F[Args Struct]
     E -->|No| G[clap Error]
-    G --> H[Display Help/Error]
-    F --> I[Config::from_args]
-    I --> J[run config]
+    G --> H[Display Help/Error<br/>with AI instructions]
+    F --> I[Config::from_args<br/>config.rs]
+    I --> J[run config<br/>lib.rs]
     J --> K{Result?}
     K -->|Ok| L[Exit 0]
-    K -->|Err| M[Display Error]
-    M --> N[Exit with Code]
+    K -->|Err| M[Display Error<br/>Pdf2MdError]
+    M --> N[Exit with Code<br/>error.rs mapping]
 
-    style A fill:#e3f2fd
-    style F fill:#c8e6c9
-    style G fill:#ffcdd2
-    style L fill:#c8e6c9
-    style N fill:#ffcdd2
+    style A fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
+    style B fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
+    style C fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
+    style F fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
+    style G fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
+    style L fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
+    style N fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
 ```
 
 ## CLI Structure
@@ -120,10 +128,10 @@ Author: John Doe
 Has extractable text: Yes
 
 Detected sections:
-  • Introduction
-  • Getting Started
-  • Advanced Features
-  • Troubleshooting
+  * Introduction
+  * Getting Started
+  * Advanced Features
+  * Troubleshooting
 
 === End Preview ===
 ```

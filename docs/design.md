@@ -463,7 +463,7 @@ fn run_dry_run(doc: &pdf::PdfDocument) -> Result<()> {
     if !metadata.sections.is_empty() {
         println!("\nDetected sections:");
         for section in &metadata.sections {
-            println!("  • {}", section);
+            println!("  * {}", section);
         }
     }
 

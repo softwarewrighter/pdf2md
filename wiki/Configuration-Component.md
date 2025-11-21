@@ -2,9 +2,9 @@
 
 The Configuration component manages application settings, validates input/output paths, and converts CLI arguments into a structured configuration object.
 
-## File
+## Location
 
-**`src/config.rs`** - Configuration management module
+**`crates/pdf2md/src/config.rs`** - Configuration management module (pdf2md binary crate)
 
 ## Responsibilities
 
@@ -16,18 +16,19 @@ The Configuration component manages application settings, validates input/output
 ## Architecture
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
 graph TB
-    A[CLI Args] --> B[Config::from_args]
+    A[CLI Args<br/>cli.rs] --> B[Config::from_args<br/>config.rs]
     B --> C[Create Config Struct]
     C --> D[Config Object]
 
-    D --> E[validate]
+    D --> E[validate<br/>config.rs]
     E --> F[validate_input_path]
     E --> G[validate_output_path]
 
     F --> H{Input Exists?}
     H -->|Yes| I{Is File?}
-    H -->|No| J[InvalidInput Error]
+    H -->|No| J[InvalidInput Error<br/>Pdf2MdError]
 
     I -->|Yes| K[Input Valid]
     I -->|No| J
@@ -41,10 +42,10 @@ graph TB
     K --> O[Validation Success]
     M --> O
 
-    style A fill:#e3f2fd
-    style D fill:#c8e6c9
-    style O fill:#c8e6c9
-    style J fill:#ffcdd2
+    style A fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
+    style D fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
+    style O fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
+    style J fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
 ```
 
 ## Data Structures
@@ -172,9 +173,9 @@ fn validate_output_path(path: &Path) -> Result<()> {
 3. **Empty Parent OK** - If no parent (current dir), always valid
 
 **Logic**:
-- `output.md` → OK (current directory)
-- `docs/output.md` → Check if `docs/` exists
-- `docs/guide/output.md` → Check if `docs/guide/` exists
+- `output.md` -> OK (current directory)
+- `docs/output.md` -> Check if `docs/` exists
+- `docs/guide/output.md` -> Check if `docs/guide/` exists
 
 **Why Not Create Directories?**
 - Validation should not modify filesystem

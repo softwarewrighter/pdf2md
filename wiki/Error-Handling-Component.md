@@ -1,10 +1,12 @@
 # Error Handling Component
 
-The Error Handling component defines custom error types, provides error conversion from external libraries, and manages error propagation throughout the application.
+The Error Handling component is distributed across all three workspace crates, with each crate defining its own error types. The binary crate aggregates library errors.
 
-## File
+## Location
 
-**`src/error.rs`** - Error types and handling
+- **`crates/pdf-extract/src/lib.rs`** - PdfError enum
+- **`crates/markdown-gen/src/lib.rs`** - MarkdownError enum
+- **`crates/pdf2md/src/error.rs`** - Pdf2MdError enum (wraps library errors)
 
 ## Responsibilities
 
@@ -17,61 +19,60 @@ The Error Handling component defines custom error types, provides error conversi
 ## Architecture
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
 graph TB
     subgraph "Error Sources"
-        A[I/O Error]
+        A[std::io::Error]
         B[CLI Validation]
-        C[PDF Processing]
-        D[Markdown Generation]
+        C[PDF Processing<br/>pdf-extract crate]
+        D[Markdown I/O<br/>markdown-gen crate]
     end
 
-    subgraph "Error Conversion"
-        E[From<io::Error>]
-        F[Manual Creation]
-        G[Library Error Conversion]
+    subgraph "Library Error Types"
+        E[PdfError<br/>pdf-extract]
+        F[MarkdownError<br/>markdown-gen]
     end
 
-    subgraph "Pdf2MdError Enum"
-        H[InvalidInput]
-        I[IoError]
-        J[PdfProcessing]
-        K[MarkdownGeneration]
+    subgraph "Binary Error Type"
+        G[Pdf2MdError<br/>pdf2md crate]
+        H[InvalidInput variant]
+        I[PdfError variant]
+        J[MarkdownError variant]
+        K[Io variant]
     end
 
-    subgraph "Error Handling"
+    subgraph "Error Handling (main.rs)"
         L[Display Trait]
         M[Error Trait]
         N[Exit Code Mapping]
     end
 
     A --> E
-    E --> I
-    B --> F
-    F --> H
-    C --> G
-    G --> J
+    A --> F
+    C --> E
     D --> F
-    F --> K
 
-    H --> L
-    I --> L
-    J --> L
-    K --> L
+    E --> I
+    F --> J
+    B --> H
+    A --> K
 
-    H --> M
-    I --> M
-    J --> M
-    K --> M
+    I --> G
+    J --> G
+    H --> G
+    K --> G
 
-    H --> N
-    I --> N
-    J --> N
-    K --> N
+    G --> L
+    G --> M
+    G --> N
 
-    style H fill:#ffcdd2
-    style I fill:#ffcdd2
-    style J fill:#ffcdd2
-    style K fill:#ffcdd2
+    style E fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
+    style F fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
+    style G fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
+    style H fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
+    style I fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
+    style J fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
+    style K fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
 ```
 
 ## Error Types

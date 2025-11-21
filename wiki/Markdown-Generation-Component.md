@@ -1,10 +1,15 @@
 # Markdown Generation Component
 
-The Markdown Generation component is responsible for formatting extracted PDF content as Markdown and writing it to output files.
+The Markdown Generation component is a standalone library crate responsible for formatting text content as Markdown and writing it to output files.
 
-## File
+## Location
 
-**`src/markdown.rs`** - Markdown generation module
+**`crates/markdown-gen/`** - Markdown generation library crate
+
+## Modules
+
+- `format.rs` - Content formatting functions
+- `writer.rs` - File I/O and directory creation
 
 ## Responsibilities
 
@@ -17,16 +22,17 @@ The Markdown Generation component is responsible for formatting extracted PDF co
 ## Architecture
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
 graph TB
-    A[ExtractedContent] --> B[format_content]
+    A[Text String] --> B[format_content<br/>format.rs]
     B --> C[Parse Structure]
     C --> D[Identify Headings]
     D --> E[Preserve Paragraphs]
     E --> F[Format Special Characters]
     F --> G[Markdown String]
 
-    G --> H[write_to_file]
-    H --> I[create_parent_dirs]
+    G --> H[write_to_file<br/>writer.rs]
+    H --> I[create_parent_dirs<br/>writer.rs]
     I --> J{Parent Exists?}
     J -->|Yes| K[Create File]
     J -->|No| L[Create Directories]
@@ -36,23 +42,23 @@ graph TB
     M --> N[Flush to Disk]
     N --> O[Success]
 
-    style A fill:#fff9c4
-    style G fill:#ffe0b2
-    style O fill:#c8e6c9
+    style A fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
+    style B fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
+    style G fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
+    style H fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
+    style I fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
+    style O fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
 ```
 
 ## Core Functions
 
 ### format_content
 
-Formats extracted PDF content as Markdown:
+Formats text content as Markdown (generic, not PDF-specific):
 
 ```rust
-pub fn format_content(content: &ExtractedContent) -> String {
+pub fn format_content(text: &str) -> String {
     debug!("Formatting content as Markdown");
-
-    // Process the text
-    let text = &content.text;
 
     // Preserve paragraph breaks
     // Detect and format headings
@@ -62,6 +68,8 @@ pub fn format_content(content: &ExtractedContent) -> String {
     formatted_text
 }
 ```
+
+**Note**: This function is generic and works with any text input, not just PDF-extracted content. This makes the markdown-gen crate reusable for other text-to-markdown workflows.
 
 **Processing Steps**:
 1. **Preserve Paragraphs** - Keep paragraph breaks from PDF
@@ -151,9 +159,9 @@ pub fn create_parent_dirs(path: &Path) -> Result<()> {
 4. No-op if parent already exists
 
 **Examples**:
-- `output.md` → No parent directory needed (current dir)
-- `docs/output.md` → Create `docs/` if it doesn't exist
-- `docs/guide/chapter1.md` → Create `docs/guide/` if it doesn't exist
+- `output.md` -> No parent directory needed (current dir)
+- `docs/output.md` -> Create `docs/` if it doesn't exist
+- `docs/guide/chapter1.md` -> Create `docs/guide/` if it doesn't exist
 
 ## Formatting Strategies
 
@@ -206,9 +214,9 @@ fn preserve_paragraphs(text: &str) -> String {
 ```
 
 **Rules**:
-- Single newline → Join lines (PDFs often break mid-sentence)
-- Double newline → Paragraph break
-- Multiple newlines → Collapse to double newline
+- Single newline -> Join lines (PDFs often break mid-sentence)
+- Double newline -> Paragraph break
+- Multiple newlines -> Collapse to double newline
 
 ### Special Character Handling
 

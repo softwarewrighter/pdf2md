@@ -16,24 +16,24 @@ This project follows strict Test-Driven Development practices using the **Red-Gr
 #### The Red-Green-Refactor Cycle
 
 ```
-┌─────────────┐
-│     RED     │  Write a failing test
-│   (Test)    │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│    GREEN    │  Write minimal code to pass
-│   (Code)    │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│  REFACTOR   │  Clean up and improve
-│  (Improve)  │
-└──────┬──────┘
-       │
-       └───────▶ Repeat
++-------------+
+|     RED     |  Write a failing test
+|   (Test)    |
++------+------+
+       |
+       v
++-------------+
+|    GREEN    |  Write minimal code to pass
+|   (Code)    |
++------+------+
+       |
+       v
++-------------+
+|  REFACTOR   |  Clean up and improve
+|  (Improve)  |
++------+------+
+       |
+       +-------> Repeat
 ```
 
 #### Step 1: RED - Write Failing Test
@@ -210,13 +210,13 @@ pub fn my_function(param1: Type1, param2: Type2) -> Result<ReturnType> {
 ### Module Organization
 ```
 src/
-├── lib.rs          # Public API, orchestration
-├── main.rs         # CLI entry point (minimal)
-├── cli.rs          # Argument parsing
-├── config.rs       # Configuration
-├── error.rs        # Error types
-├── pdf.rs          # PDF processing
-└── markdown.rs     # Markdown generation
++-- lib.rs          # Public API, orchestration
++-- main.rs         # CLI entry point (minimal)
++-- cli.rs          # Argument parsing
++-- config.rs       # Configuration
++-- error.rs        # Error types
++-- pdf.rs          # PDF processing
++-- markdown.rs     # Markdown generation
 ```
 
 **Rules**:

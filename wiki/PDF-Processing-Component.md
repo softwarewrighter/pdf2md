@@ -1,10 +1,19 @@
 # PDF Processing Component
 
-The PDF Processing component is responsible for reading PDF files, validating their format, extracting text content, and gathering metadata.
+The PDF Processing component is a standalone library crate responsible for reading PDF files, validating their format, extracting text content, and gathering metadata.
 
-## File
+## Location
 
-**`src/pdf.rs`** - PDF processing module
+**`crates/pdf-extract/`** - PDF processing library crate
+
+## Modules
+
+- `document.rs` - PdfDocument struct and implementation
+- `validation.rs` - PDF format validation functions
+- `text.rs` - Text extraction from PDF pages
+- `metadata.rs` - Metadata extraction functions
+- `types.rs` - ExtractedContent and PdfMetadata structs
+- `test_utils.rs` - Test fixture utilities
 
 ## Responsibilities
 
@@ -17,32 +26,37 @@ The PDF Processing component is responsible for reading PDF files, validating th
 ## Architecture
 
 ```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
 graph TB
-    A[PDF File Path] --> B[validate_pdf]
+    A[PDF File Path] --> B[validate_pdf<br/>validation.rs]
     B --> C{Valid Header?}
-    C -->|Yes| D[PdfDocument::open]
-    C -->|No| E[PdfProcessing Error]
+    C -->|Yes| D[PdfDocument::open<br/>document.rs]
+    C -->|No| E[PdfError]
 
-    D --> F[Parse PDF Structure]
+    D --> F[Parse PDF Structure<br/>lopdf library]
     F --> G[PdfDocument Object]
 
     G --> H{Operation}
-    H -->|Extract Text| I[extract_text]
-    H -->|Extract Metadata| J[extract_metadata]
+    H -->|Extract Text| I[extract_text<br/>text.rs]
+    H -->|Extract Metadata| J[extract_metadata<br/>metadata.rs]
 
     I --> K[Iterate Pages]
     K --> L[Extract Text Per Page]
-    L --> M[ExtractedContent]
+    L --> M[ExtractedContent<br/>types.rs]
 
     J --> N[Read Document Info]
     N --> O[Detect Sections]
-    O --> P[PdfMetadata]
+    O --> P[PdfMetadata<br/>types.rs]
 
-    style A fill:#e3f2fd
-    style G fill:#c8e6c9
-    style M fill:#fff9c4
-    style P fill:#ffe0b2
-    style E fill:#ffcdd2
+    style A fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
+    style B fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
+    style D fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
+    style G fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
+    style I fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
+    style J fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
+    style M fill:#fffde7,stroke:#333,stroke-width:2px,color:#000
+    style P fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
+    style E fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
 ```
 
 ## Data Structures

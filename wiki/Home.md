@@ -36,14 +36,14 @@ The system follows a layered architecture:
 
 ```
 User/Shell
-    ↓
+    v
 CLI Layer (Argument Parsing)
-    ↓
+    v
 Application Layer (Orchestration)
-    ↓
-    ├─→ PDF Processing Module
-    └─→ Markdown Generation Module
-        ↓
+    v
+    +--> PDF Processing Module
+    +--> Markdown Generation Module
+        v
     Filesystem/Output
 ```
 
@@ -57,17 +57,39 @@ Application Layer (Orchestration)
 
 ## Module Structure
 
-### Source Files
+### Workspace Structure
 
 ```
-src/
-├── main.rs         # CLI entry point
-├── lib.rs          # Public API and orchestration
-├── cli.rs          # Argument parsing (clap)
-├── config.rs       # Configuration management
-├── error.rs        # Error types and handling
-├── pdf.rs          # PDF processing
-└── markdown.rs     # Markdown generation
+pdf2md/                    # Workspace root
++-- crates/
+|   +-- pdf-extract/       # PDF processing library
+|   |   +-- src/
+|   |   |   +-- lib.rs           # Public API
+|   |   |   +-- document.rs      # PdfDocument struct and impl
+|   |   |   +-- metadata.rs      # Metadata extraction
+|   |   |   +-- text.rs          # Text extraction
+|   |   |   +-- types.rs         # ExtractedContent, PdfMetadata
+|   |   |   +-- validation.rs    # PDF format validation
+|   |   |   +-- test_utils.rs    # Test fixtures
+|   |   +-- Cargo.toml
+|   +-- markdown-gen/      # Markdown generation library
+|   |   +-- src/
+|   |   |   +-- lib.rs           # Public API
+|   |   |   +-- format.rs        # Content formatting
+|   |   |   +-- writer.rs        # File writing
+|   |   +-- Cargo.toml
+|   +-- pdf2md/            # CLI binary
+|       +-- src/
+|       |   +-- main.rs          # CLI entry point
+|       |   +-- lib.rs           # Orchestration
+|       |   +-- cli.rs           # Argument parsing
+|       |   +-- config.rs        # Configuration management
+|       |   +-- error.rs         # Error types
+|       |   +-- dry_run.rs       # Dry-run mode
+|       |   +-- logging.rs       # Logging setup
+|       +-- build.rs             # Build-time metadata
+|       +-- Cargo.toml
++-- Cargo.toml             # Workspace definition
 ```
 
 ### Core Workflow

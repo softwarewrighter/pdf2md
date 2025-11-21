@@ -4,85 +4,117 @@
 
 pdf2md follows a **modular, layered architecture** that separates concerns into distinct components. This design promotes maintainability, testability, and extensibility.
 
-## Architectural Layers
+## Workspace Architecture
 
-### 1. CLI Layer
-**File**: `src/main.rs`, `src/cli.rs`
+pdf2md is organized as a Cargo workspace with three crates:
 
-**Responsibilities**:
-- Command-line argument parsing using clap
-- Help and version information display
-- Error formatting for user-friendly output
-- Application entry point
+1. **pdf-extract** - Library for PDF processing
+2. **markdown-gen** - Library for Markdown generation
+3. **pdf2md** - CLI binary that orchestrates the libraries
 
-**Key Design Decisions**:
-- Uses clap's derive macros for declarative argument parsing
-- Minimal logic - delegates to application layer
-- Handles process exit codes based on error types
+### Workspace Benefits
 
-### 2. Application Layer
-**File**: `src/lib.rs`, `src/config.rs`
+- **Reusability**: Libraries can be used independently by other projects
+- **Modularity**: Clear separation between PDF processing, Markdown generation, and CLI concerns
+- **Testability**: Each crate has focused test suites (37 tests total across workspace)
+- **Maintainability**: Smaller, focused modules within each crate
 
-**Responsibilities**:
-- Input validation and configuration management
-- Orchestration of PDF and Markdown processing
-- Logging initialization and coordination
-- High-level error handling
+## Crate Architecture
 
-**Key Design Decisions**:
-- Single `run()` function as the main entry point
-- Configuration struct separates CLI concerns from business logic
-- Centralized logging setup based on verbosity settings
+### 1. pdf-extract Library Crate
 
-### 3. Processing Modules
+**Location**: `crates/pdf-extract/`
 
-#### PDF Processing Module
-**File**: `src/pdf.rs`
+**Purpose**: Standalone library for extracting text and metadata from PDF documents
 
-**Responsibilities**:
-- PDF file validation
-- PDF document opening and reading
-- Text content extraction
-- Metadata extraction for dry-run mode
+**Modules**:
+- `document.rs` - PdfDocument struct and implementation
+- `metadata.rs` - Metadata extraction functions
+- `text.rs` - Text extraction from PDF pages
+- `types.rs` - ExtractedContent, PdfMetadata structs
+- `validation.rs` - PDF format validation
+- `test_utils.rs` - Test fixture utilities
 
-**Key Design Decisions**:
-- Encapsulates PDF library interactions
-- Provides clean API: `open()`, `extract_text()`, `extract_metadata()`
-- Validates PDF format before processing
-
-#### Markdown Generation Module
-**File**: `src/markdown.rs`
-
-**Responsibilities**:
-- Content formatting as Markdown
-- Output file writing
-- Directory creation for output paths
+**Public API**:
+```rust
+pub fn validate_pdf(path: &Path) -> Result<()>
+pub struct PdfDocument { ... }
+pub struct ExtractedContent { text: String, page_count: usize }
+pub struct PdfMetadata { ... }
+pub enum PdfError { InvalidInput, Processing, Io }
+```
 
 **Key Design Decisions**:
-- Separates formatting logic from I/O operations
-- Handles parent directory creation automatically
-- Simple, focused functions for single responsibilities
+- Clean separation of document operations, extraction, and validation
+- Provides both text extraction and metadata preview capabilities
+- Error type specific to PDF operations
 
-### 4. Cross-Cutting Concerns
+### 2. markdown-gen Library Crate
 
-#### Error Handling
-**File**: `src/error.rs`
+**Location**: `crates/markdown-gen/`
 
-**Responsibilities**:
-- Custom error type definitions
-- Error conversion from external libraries
-- User-friendly error messages
-- Exit code mapping
+**Purpose**: Standalone library for converting text to Markdown and writing files
+
+**Modules**:
+- `format.rs` - Content formatting functions
+- `writer.rs` - File I/O and directory creation
+
+**Public API**:
+```rust
+pub fn format_content(text: &str) -> String
+pub fn write_to_file(content: &str, path: &Path) -> Result<()>
+pub fn create_parent_dirs(path: &Path) -> Result<()>
+pub enum MarkdownError { Io }
+```
 
 **Key Design Decisions**:
-- Single `Pdf2MdError` enum for all error types
-- Implements `std::error::Error` and `Display` traits
-- Provides context-rich error messages
+- Generic text-to-markdown conversion (no PDF dependencies)
+- Separates formatting from I/O operations
+- Can be used for any text-to-markdown workflow
+
+### 3. pdf2md Binary Crate
+
+**Location**: `crates/pdf2md/`
+
+**Purpose**: CLI application that orchestrates pdf-extract and markdown-gen
+
+**Modules**:
+- `main.rs` - CLI entry point, exit code handling
+- `cli.rs` - Argument parsing with clap, AI agent instructions
+- `lib.rs` - Public API and orchestration logic
+- `config.rs` - Configuration management and validation
+- `error.rs` - Error type that wraps library errors
+- `dry_run.rs` - Dry-run mode implementation
+- `logging.rs` - Logging initialization
+
+**Build Script**:
+- `build.rs` - Captures build-time metadata (host, commit, timestamp)
+
+**Key Design Decisions**:
+- Minimal business logic - delegates to library crates
+- Error type wraps PdfError and MarkdownError from libraries
+- Configuration layer translates CLI args to library calls
+- Build metadata included in version output
+
+## Cross-Cutting Concerns
+
+### Error Handling
+
+**pdf-extract**: `PdfError` enum for PDF-specific errors
+**markdown-gen**: `MarkdownError` enum for I/O errors
+**pdf2md**: `Pdf2MdError` enum that wraps library errors
+
+**Key Design Decisions**:
+- Each library has its own error type
+- Binary crate aggregates and converts errors
+- User-friendly error messages at binary boundary
+- Exit code mapping in main.rs
 
 See **[[Error-Handling-Component]]** for detailed information.
 
-#### Configuration Management
-**File**: `src/config.rs`
+### Configuration Management
+
+**File**: `crates/pdf2md/src/config.rs`
 
 **Responsibilities**:
 - Configuration struct definition
@@ -118,30 +150,68 @@ All modules are designed for testability:
 - Path traversal prevention
 - Safe error messages (no information leakage)
 
-## Module Dependencies
+## Workspace Dependencies
 
 ```mermaid
-graph TD
-    A[main.rs] --> B[lib.rs]
-    A --> C[cli.rs]
-    B --> C
-    B --> D[config.rs]
-    B --> E[pdf.rs]
-    B --> F[markdown.rs]
-    B --> G[error.rs]
-    C --> G
-    D --> G
-    E --> G
-    F --> G
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
+graph TB
+    subgraph "pdf2md Binary Crate"
+        A[main.rs]
+        B[lib.rs]
+        C[cli.rs]
+        D[config.rs]
+        E[error.rs]
+        F[dry_run.rs]
+        G[logging.rs]
+    end
+
+    subgraph "pdf-extract Library"
+        H[PdfDocument]
+        I[validate_pdf]
+        J[PdfError]
+    end
+
+    subgraph "markdown-gen Library"
+        K[format_content]
+        L[write_to_file]
+        M[MarkdownError]
+    end
+
+    A --> B
+    A --> C
+    B --> D
+    B --> F
+    B --> G
+    B --> H
+    B --> I
+    B --> K
+    B --> L
+    C --> E
+    E --> J
+    E --> M
+
+    style A fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
+    style B fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
+    style C fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
+    style D fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
+    style E fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
+    style F fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
+    style G fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
+    style H fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
+    style I fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
+    style J fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
+    style K fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
+    style L fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
+    style M fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
 ```
 
 ### Dependency Rules
 
-1. **CLI Layer** depends on Application Layer
-2. **Application Layer** orchestrates Processing Modules
-3. **Processing Modules** are independent of each other
-4. **All modules** depend on Error module
-5. **No circular dependencies**
+1. **Binary crate** depends on both library crates
+2. **Library crates** are independent of each other
+3. **pdf-extract** has no dependencies on markdown-gen
+4. **markdown-gen** has no dependencies on pdf-extract
+5. **No circular dependencies** across crates
 
 ## Component Interaction
 

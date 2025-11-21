@@ -66,7 +66,7 @@ Run test: Should fail (function doesn't exist yet)
 cargo test test_validate_pdf_header
 ```
 
-Expected: ❌ Test fails
+Expected: [x] Test fails
 
 #### 2. GREEN - Write Minimal Code
 
@@ -94,7 +94,7 @@ Run test: Should pass
 cargo test test_validate_pdf_header
 ```
 
-Expected: ✅ Test passes
+Expected: [x] Test passes
 
 #### 3. REFACTOR - Improve Code
 
@@ -128,7 +128,7 @@ Run all tests:
 cargo test
 ```
 
-Expected: ✅ All tests pass
+Expected: [x] All tests pass
 
 ## Development Workflow
 

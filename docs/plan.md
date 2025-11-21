@@ -48,10 +48,10 @@ This document outlines the phased implementation plan for building the pdf2md to
 
 ### Tasks
 
-#### 2.1 Error Module (Red → Green → Refactor)
+#### 2.1 Error Module (Red -> Green -> Refactor)
 **Red**: Write tests
 - [ ] Test error display messages
-- [ ] Test error conversions (io::Error → Pdf2MdError)
+- [ ] Test error conversions (io::Error -> Pdf2MdError)
 - [ ] Test exit code mapping
 
 **Green**: Implement
@@ -65,7 +65,7 @@ This document outlines the phased implementation plan for building the pdf2md to
 - [ ] Ensure error messages are user-friendly
 - [ ] Run clippy and fix suggestions
 
-#### 2.2 Configuration Module (Red → Green → Refactor)
+#### 2.2 Configuration Module (Red -> Green -> Refactor)
 **Red**: Write tests
 - [ ] Test config creation from args
 - [ ] Test input path validation (exists, is file)
@@ -84,7 +84,7 @@ This document outlines the phased implementation plan for building the pdf2md to
 - [ ] Extract helper functions
 - [ ] Ensure functions are small and focused
 
-#### 2.3 CLI Module (Red → Green → Refactor)
+#### 2.3 CLI Module (Red -> Green -> Refactor)
 **Red**: Write tests
 - [ ] Test argument parsing with valid inputs
 - [ ] Test help flag
@@ -113,7 +113,7 @@ This document outlines the phased implementation plan for building the pdf2md to
 
 ### Tasks
 
-#### 3.1 PDF Validation (Red → Green → Refactor)
+#### 3.1 PDF Validation (Red -> Green -> Refactor)
 **Red**: Write tests
 - [ ] Test PDF header validation with valid PDF
 - [ ] Test PDF header validation with invalid file
@@ -130,7 +130,7 @@ This document outlines the phased implementation plan for building the pdf2md to
 - [ ] Optimize file reading (only read header)
 - [ ] Handle edge cases
 
-#### 3.2 PDF Document Structure (Red → Green → Refactor)
+#### 3.2 PDF Document Structure (Red -> Green -> Refactor)
 **Red**: Write tests
 - [ ] Test PDF document opening
 - [ ] Test file extension validation
@@ -146,7 +146,7 @@ This document outlines the phased implementation plan for building the pdf2md to
 - [ ] Add documentation comments
 - [ ] Ensure proper error propagation
 
-#### 3.3 Metadata Extraction for Dry-Run (Red → Green → Refactor)
+#### 3.3 Metadata Extraction for Dry-Run (Red -> Green -> Refactor)
 **Red**: Write tests
 - [ ] Test metadata extraction
 - [ ] Test with PDF with metadata
@@ -174,7 +174,7 @@ This document outlines the phased implementation plan for building the pdf2md to
 
 ### Tasks
 
-#### 4.1 Markdown Formatting (Red → Green → Refactor)
+#### 4.1 Markdown Formatting (Red -> Green -> Refactor)
 **Red**: Write tests
 - [ ] Test basic text formatting
 - [ ] Test with empty content
@@ -189,7 +189,7 @@ This document outlines the phased implementation plan for building the pdf2md to
 - [ ] Add documentation comments
 - [ ] Optimize string operations
 
-#### 4.2 File Writing (Red → Green → Refactor)
+#### 4.2 File Writing (Red -> Green -> Refactor)
 **Red**: Write tests
 - [ ] Test file writing with valid path
 - [ ] Test parent directory creation
@@ -218,7 +218,7 @@ This document outlines the phased implementation plan for building the pdf2md to
 
 ### Tasks
 
-#### 5.1 Logging Setup (Red → Green → Refactor)
+#### 5.1 Logging Setup (Red -> Green -> Refactor)
 **Red**: Write tests
 - [ ] Test logging initialization with verbose flag
 - [ ] Test logging initialization without verbose flag
@@ -230,9 +230,9 @@ This document outlines the phased implementation plan for building the pdf2md to
 **Refactor**: Clean up and document
 - [ ] Add documentation comments
 
-#### 5.2 Main Application Flow (Red → Green → Refactor)
+#### 5.2 Main Application Flow (Red -> Green -> Refactor)
 **Red**: Write tests
-- [ ] Integration test with valid PDF → MD conversion
+- [ ] Integration test with valid PDF -> MD conversion
 - [ ] Integration test with dry-run mode
 - [ ] Integration test with invalid input
 - [ ] Integration test with verbose mode
