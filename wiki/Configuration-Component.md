@@ -16,7 +16,7 @@ The Configuration component manages application settings, validates input/output
 ## Architecture
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
+%%{init: {'theme':'neutral'}}%%
 graph TB
     A[CLI Args<br/>cli.rs] --> B[Config::from_args<br/>config.rs]
     B --> C[Create Config Struct]
@@ -42,10 +42,10 @@ graph TB
     K --> O[Validation Success]
     M --> O
 
-    style A fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style D fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style O fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style J fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
+    style A fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style D fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style O fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style J fill:#fce4ec,stroke:#c2185b,stroke-width:2px
 ```
 
 ## Data Structures

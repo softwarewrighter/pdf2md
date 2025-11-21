@@ -22,7 +22,7 @@ The Markdown Generation component is a standalone library crate responsible for 
 ## Architecture
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
+%%{init: {'theme':'neutral'}}%%
 graph TB
     A[Text String] --> B[format_content<br/>format.rs]
     B --> C[Parse Structure]
@@ -42,12 +42,12 @@ graph TB
     M --> N[Flush to Disk]
     N --> O[Success]
 
-    style A fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
-    style B fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
-    style G fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
-    style H fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
-    style I fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
-    style O fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
+    style A fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    style B fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
+    style G fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
+    style H fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
+    style I fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
+    style O fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
 ```
 
 ## Core Functions

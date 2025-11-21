@@ -7,7 +7,7 @@ This page provides visual representations of the pdf2md system architecture usin
 The following diagram shows the high-level workspace structure with three crates:
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
+%%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph "User Interface"
         A[User/Shell]
@@ -58,23 +58,23 @@ graph TB
     F -.-> I
     F -.-> N
 
-    style A fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
-    style B fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style C fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style D fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style E fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style F fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
-    style G fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style H fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style I fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style J fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style K fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style L fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style M fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style N fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
-    style O fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
-    style P fill:#f5f5f5,stroke:#333,stroke-width:2px,color:#000
-    style Q fill:#f5f5f5,stroke:#333,stroke-width:2px,color:#000
+    style A fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    style B fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style C fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style D fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style E fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style F fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    style G fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style H fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style I fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style J fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style K fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style L fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style M fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style N fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
+    style O fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
+    style P fill:#f5f5f5,stroke:#616161,stroke-width:2px
+    style Q fill:#f5f5f5,stroke:#616161,stroke-width:2px
 ```
 
 ## Crate Dependency Diagram
@@ -82,7 +82,7 @@ graph TB
 Shows the dependencies between the three workspace crates:
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
+%%{init: {'theme':'neutral'}}%%
 graph LR
     A[pdf2md Binary Crate]
     B[pdf-extract Library]
@@ -91,9 +91,9 @@ graph LR
     A --> B
     A --> C
 
-    style A fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style B fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style C fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
+    style A fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style B fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style C fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
 ```
 
 **Key Points**:
@@ -106,7 +106,7 @@ graph LR
 Detailed view of component responsibilities across workspace crates:
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
+%%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph "CLI Component (pdf2md crate)"
         A1[Argument Parsing]
@@ -152,23 +152,23 @@ graph TB
     E1 --> E3
     E2 --> E3
 
-    style A1 fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style A2 fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style A3 fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style B1 fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style B2 fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style B3 fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style C1 fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style C2 fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style C3 fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style C4 fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style D1 fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
-    style D2 fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
-    style D3 fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
-    style E1 fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
-    style E2 fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
-    style E3 fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
-    style K fill:#f5f5f5,stroke:#333,stroke-width:2px,color:#000
+    style A1 fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style A2 fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style A3 fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style B1 fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style B2 fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style B3 fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style C1 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style C2 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style C3 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style C4 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style D1 fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
+    style D2 fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
+    style D3 fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
+    style E1 fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    style E2 fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    style E3 fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    style K fill:#f5f5f5,stroke:#616161,stroke-width:2px
 ```
 
 ## Data Structure Relationships
@@ -176,7 +176,7 @@ graph TB
 Key data structures across the workspace:
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
+%%{init: {'theme':'neutral'}}%%
 classDiagram
     namespace pdf2md {
         class Args {
@@ -255,7 +255,7 @@ classDiagram
 The data flow through the processing pipeline across workspace crates:
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
+%%{init: {'theme':'neutral'}}%%
 flowchart LR
     A[User Input] --> B[CLI Parser<br/>pdf2md crate]
     B --> C{Valid Args?}
@@ -277,19 +277,19 @@ flowchart LR
     D --> P[Exit with Error]
     O --> Q[Exit with Success]
 
-    style A fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
-    style B fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style E fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style G fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style J fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style K fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style M fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
-    style N fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
-    style D fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
-    style P fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
-    style O fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style Q fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style L fill:#f5f5f5,stroke:#333,stroke-width:2px,color:#000
+    style A fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    style B fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style E fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style G fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style J fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style K fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style M fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
+    style N fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
+    style D fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    style P fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    style O fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style Q fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style L fill:#f5f5f5,stroke:#616161,stroke-width:2px
 ```
 
 ## Error Handling Flow
@@ -297,7 +297,7 @@ flowchart LR
 How errors propagate across workspace crates:
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
+%%{init: {'theme':'neutral'}}%%
 flowchart TB
     A[Error Occurs] --> B{Error Source}
     B -->|IO Error| C[std::io::Error]
@@ -317,13 +317,13 @@ flowchart TB
     K --> L[Map to Exit Code]
     L --> M[Exit Process]
 
-    style A fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
-    style C fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
-    style D fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style E fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
-    style F fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style K fill:#fffde7,stroke:#333,stroke-width:2px,color:#000
-    style M fill:#f5f5f5,stroke:#333,stroke-width:2px,color:#000
+    style A fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    style C fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    style D fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style E fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
+    style F fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style K fill:#fffde7,stroke:#f57c00,stroke-width:2px
+    style M fill:#f5f5f5,stroke:#616161,stroke-width:2px
 ```
 
 ## Logging Architecture
@@ -331,7 +331,7 @@ flowchart TB
 Logging flow based on verbosity settings:
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
+%%{init: {'theme':'neutral'}}%%
 flowchart LR
     A[Application Start<br/>pdf2md crate] --> B{Verbose Flag?}
     B -->|Yes| C[Set Log Level: Info]
@@ -356,12 +356,12 @@ flowchart LR
     J -->|Level >= Info| K[Output to stderr]
     J -->|Level < Info| L[Suppress]
 
-    style A fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style C fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style D fill:#fffde7,stroke:#333,stroke-width:2px,color:#000
-    style E fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style K fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
-    style L fill:#f5f5f5,stroke:#333,stroke-width:2px,color:#000
+    style A fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style C fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style D fill:#fffde7,stroke:#f57c00,stroke-width:2px
+    style E fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style K fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
+    style L fill:#f5f5f5,stroke:#616161,stroke-width:2px
 ```
 
 ## Future Extension Points
@@ -369,7 +369,7 @@ flowchart LR
 Planned extensibility architecture for library crates:
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
+%%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph "Current Architecture"
         A[pdf-extract crate<br/>Concrete implementation]
@@ -402,17 +402,17 @@ graph TB
     D --> J
     D --> K
 
-    style A fill:#f5f5f5,stroke:#333,stroke-width:2px,color:#000
-    style B fill:#f5f5f5,stroke:#333,stroke-width:2px,color:#000
-    style C fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style D fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
-    style E fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
-    style F fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
-    style G fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
-    style H fill:#fffde7,stroke:#333,stroke-width:2px,color:#000
-    style I fill:#fffde7,stroke:#333,stroke-width:2px,color:#000
-    style J fill:#fffde7,stroke:#333,stroke-width:2px,color:#000
-    style K fill:#fffde7,stroke:#333,stroke-width:2px,color:#000
+    style A fill:#f5f5f5,stroke:#616161,stroke-width:2px
+    style B fill:#f5f5f5,stroke:#616161,stroke-width:2px
+    style C fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style D fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
+    style E fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    style F fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    style G fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    style H fill:#fffde7,stroke:#f57c00,stroke-width:2px
+    style I fill:#fffde7,stroke:#f57c00,stroke-width:2px
+    style J fill:#fffde7,stroke:#f57c00,stroke-width:2px
+    style K fill:#fffde7,stroke:#f57c00,stroke-width:2px
 ```
 
 ## Related Pages

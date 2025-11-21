@@ -7,27 +7,27 @@ GitHub's mermaid diagram renderer can apply default themes that result in poor c
 - Default themes use light gray text on colored backgrounds
 - Custom colors don't explicitly define text color
 - Dark theme overrides interfere with readability
+- **GitHub dark mode** renders diagrams with black backgrounds, making dark lines invisible
 
 ## Solution
 
-Use explicit theme configuration and carefully chosen color palettes to ensure high contrast.
+Use explicit theme configuration with the **neutral** theme that adapts to both light and dark modes, and use mid-tone borders/lines that are visible on both backgrounds.
 
 ### 1. Add Theme Initialization
 
-Every mermaid diagram should start with an init directive that forces the base theme with black text:
+Every mermaid diagram should start with an init directive that uses the neutral theme:
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
+%%{init: {'theme':'neutral'}}%%
 graph TB
     A[Example Node]
 ```
 
-**Key theme variables:**
-- `theme: 'base'` - Use base theme (not default or dark)
-- `primaryTextColor: '#000'` - Force black text
-- `primaryColor: '#f5f5f5'` - Light gray default background
-- `primaryBorderColor: '#333'` - Dark border for definition
-- `lineColor: '#333'` - Dark lines for visibility
+**Key benefits of neutral theme:**
+- `theme: 'neutral'` - Adapts to GitHub's light/dark mode automatically
+- Background is transparent - uses GitHub's current theme background
+- Lines and borders use adaptive colors that work in both modes
+- Text color automatically adjusts for readability
 
 ### 2. Use Light Pastel Background Colors
 
@@ -49,29 +49,51 @@ Choose very light, high-luminance colors for node backgrounds:
 - Distinct hues for categorical differentiation
 - Material Design color palette recommended
 
-### 3. Explicit Text Color in Style Directives
+### 3. Style Directives for Both Modes
 
-Always include `color:#000` in every style directive:
+Use adaptive styling that works in both light and dark modes:
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TB
     A[Node A]
     B[Node B]
 
-    style A fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
-    style B fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
+    style A fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    style B fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
 ```
 
 **Style directive components:**
-- `fill:#e3f2fd` - Light background color
-- `stroke:#333` - Dark border color
+- `fill:#e3f2fd` - Light background color (visible in both modes)
+- `stroke:#1976d2` - **Mid-tone border** (darker than fill, visible on both backgrounds)
 - `stroke-width:2px` - Visible border
-- `color:#000` - **Black text (required)**
+- **No explicit text color** - Let neutral theme handle it automatically
+
+**Border color strategy:**
+- Use a **darker shade** of the fill color for borders
+- Sky Blue fill `#e3f2fd` → Blue border `#1976d2`
+- Mint Green fill `#e8f5e9` → Green border `#388e3c`
+- This ensures borders are visible in both light and dark modes
+
+### 4. Color Mapping with Adaptive Borders
+
+Use these fill/stroke combinations for consistent, readable diagrams:
+
+| Fill Color | Hex | Stroke Color | Hex | Use Case |
+|------------|-----|--------------|-----|----------|
+| Lavender | `#f4e8f7` | Purple | `#7b1fa2` | UI/Binary crate |
+| Sky Blue | `#e3f2fd` | Blue | `#1976d2` | API/Backend |
+| Mint Green | `#e8f5e9` | Green | `#388e3c` | Processing/Logic |
+| Peach | `#ffe0d1` | Orange | `#e64a19` | Shared/Common |
+| Cream | `#fffde7` | Gold | `#f57c00` | Database/Storage |
+| Pink | `#fce4ec` | Deep Pink | `#c2185b` | Error handling |
+| Light Blue | `#e1f5ff` | Cyan | `#0097a7` | User/External |
+| Light Gray | `#f5f5f5` | Gray | `#616161` | Neutral |
 
 ## Complete Example
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
+%%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph "Client Layer"
         UI[Web Browser]
@@ -91,11 +113,17 @@ graph TB
     REST --> DB
     MCP --> DB
 
-    style UI fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style REST fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
-    style MCP fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style DB fill:#fffde7,stroke:#333,stroke-width:2px,color:#000
+    style UI fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style REST fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    style MCP fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style DB fill:#fffde7,stroke:#f57c00,stroke-width:2px
 ```
+
+**This diagram will:**
+- Show light pastel boxes in light mode with dark text
+- Show light pastel boxes in dark mode with dark text on light backgrounds
+- Have visible colored borders in both modes
+- Have visible arrow/connection lines in both modes
 
 ## Automated Color Updates
 

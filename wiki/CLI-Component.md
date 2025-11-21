@@ -23,7 +23,7 @@ The CLI (Command-Line Interface) component handles all user interaction through 
 ## Architecture
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
+%%{init: {'theme':'neutral'}}%%
 graph TB
     A[User Command] --> B[main.rs<br/>pdf2md crate]
     B --> C[Args::parse_args<br/>cli.rs]
@@ -39,13 +39,13 @@ graph TB
     K -->|Err| M[Display Error<br/>Pdf2MdError]
     M --> N[Exit with Code<br/>error.rs mapping]
 
-    style A fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
-    style B fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style C fill:#f4e8f7,stroke:#333,stroke-width:2px,color:#000
-    style F fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style G fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
-    style L fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style N fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
+    style A fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    style B fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style C fill:#f4e8f7,stroke:#7b1fa2,stroke-width:2px
+    style F fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style G fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    style L fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style N fill:#fce4ec,stroke:#c2185b,stroke-width:2px
 ```
 
 ## CLI Structure

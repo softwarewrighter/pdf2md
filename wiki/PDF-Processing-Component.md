@@ -26,7 +26,7 @@ The PDF Processing component is a standalone library crate responsible for readi
 ## Architecture
 
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#f5f5f5','primaryTextColor':'#000','primaryBorderColor':'#333','lineColor':'#333','secondaryColor':'#f5f5f5','tertiaryColor':'#f5f5f5'}}}%%
+%%{init: {'theme':'neutral'}}%%
 graph TB
     A[PDF File Path] --> B[validate_pdf<br/>validation.rs]
     B --> C{Valid Header?}
@@ -48,15 +48,15 @@ graph TB
     N --> O[Detect Sections]
     O --> P[PdfMetadata<br/>types.rs]
 
-    style A fill:#e3f2fd,stroke:#333,stroke-width:2px,color:#000
-    style B fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style D fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style G fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style I fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style J fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
-    style M fill:#fffde7,stroke:#333,stroke-width:2px,color:#000
-    style P fill:#ffe0d1,stroke:#333,stroke-width:2px,color:#000
-    style E fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
+    style A fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    style B fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style D fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style G fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style I fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style J fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style M fill:#fffde7,stroke:#f57c00,stroke-width:2px
+    style P fill:#ffe0d1,stroke:#e64a19,stroke-width:2px
+    style E fill:#fce4ec,stroke:#c2185b,stroke-width:2px
 ```
 
 ## Data Structures
