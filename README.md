@@ -162,26 +162,43 @@ cargo doc --no-deps --open
 ### Project Structure
 
 ```
-```
 pdf2md/
-  src/
-    main.rs         # CLI entry point
-    lib.rs          # Public API and orchestration
-    cli.rs          # Argument parsing
-    config.rs       # Configuration management
-    error.rs        # Error types
-    pdf.rs          # PDF processing
-    markdown.rs     # Markdown generation
-  tests/            # Integration tests
-    integration_test.rs
-    fixtures/       # Test PDF files
-  docs/             # Project documentation
-    prd.md          # Product requirements
-    architecture.md # System architecture
-    design.md       # Detailed design
-    plan.md         # Implementation plan
-    process.md      # Development process
-  Cargo.toml
+  crates/
+    pdf-extract/      # PDF processing library
+      src/
+        lib.rs        # Public API
+        document.rs   # PdfDocument implementation
+        validation.rs # PDF format validation
+        text.rs       # Text extraction with smart paragraph breaks
+        metadata.rs   # Metadata extraction
+        types.rs      # ExtractedContent and PdfMetadata types
+        test_utils.rs # Test fixture utilities
+    markdown-gen/     # Markdown generation library
+      src/
+        lib.rs        # Public API
+        format.rs     # Markdown formatting with header detection
+        writer.rs     # File writing utilities
+    pdf2md/          # Binary crate (CLI)
+      src/
+        main.rs      # CLI entry point
+        lib.rs       # Public API and orchestration
+        cli.rs       # Argument parsing with clap
+        config.rs    # Configuration management
+        logging.rs   # Logging setup
+        dry_run.rs   # Preview mode implementation
+      tests/         # Integration tests
+        integration_test.rs
+        fixtures/    # Test PDF files
+  docs/              # Project documentation
+    prd.md           # Product requirements
+    architecture.md  # System architecture
+    design.md        # Detailed design
+    plan.md          # Implementation plan
+    process.md       # Development process
+    mermaid-contrast.md # Mermaid diagram guidelines
+  wiki/              # GitHub Wiki documentation
+    (Various architecture and component docs)
+  Cargo.toml         # Workspace configuration
   LICENSE
   README.md
 ```
