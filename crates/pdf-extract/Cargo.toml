@@ -1,0 +1,17 @@
+[package]
+name = "pdf-extract"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "PDF text and metadata extraction library"
+keywords = ["pdf", "text-extraction", "metadata", "parser"]
+categories = ["parsing", "text-processing"]
+
+[dependencies]
+log.workspace = true
+lopdf.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true

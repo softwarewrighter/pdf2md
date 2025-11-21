@@ -1,0 +1,16 @@
+[package]
+name = "markdown-gen"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Markdown generation and file writing utilities"
+keywords = ["markdown", "generator", "writer"]
+categories = ["text-processing"]
+
+[dependencies]
+log.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
