@@ -47,7 +47,7 @@ pub fn clean_extracted_text(text: &str) -> String {
     // Remove carriage returns
     let text = text.replace('\r', "");
 
-    // Normalize multiple spaces to single space
+    // Normalize multiple spaces to single space within each line
     let text = text
         .split('\n')
         .map(|line| {
@@ -78,7 +78,70 @@ pub fn clean_extracted_text(text: &str) -> String {
         }
     }
 
-    result.trim().to_string()
+    // Trim leading/trailing whitespace but preserve internal structure
+    let trimmed = result.trim().to_string();
+
+    // Ensure paragraphs are separated by blank lines
+    // If we have very few newlines, add paragraph breaks after sentences
+    if trimmed.matches('\n').count() < 3 {
+        // PDF didn't have good line break structure, add them ourselves
+        add_paragraph_breaks(&trimmed)
+    } else {
+        trimmed
+    }
+}
+
+/// Add paragraph breaks after sentences when PDF lacks structure
+fn add_paragraph_breaks(text: &str) -> String {
+    let mut result = String::new();
+    let mut chars = text.chars().peekable();
+    let mut char_count_since_break = 0;
+
+    while let Some(ch) = chars.next() {
+        result.push(ch);
+        char_count_since_break += 1;
+
+        // After a period, check if we should add a paragraph break
+        if ch == '.' && char_count_since_break > 40 {
+            // Look ahead to see if next char is uppercase or space
+            if let Some(&next_ch) = chars.peek() {
+                if next_ch.is_uppercase() || next_ch.is_whitespace() {
+                    // Skip whitespace
+                    while let Some(&next_ch) = chars.peek() {
+                        if next_ch.is_whitespace() && next_ch != '\n' {
+                            chars.next();
+                        } else {
+                            break;
+                        }
+                    }
+                    // Add paragraph break if next char is uppercase
+                    if let Some(&next_ch) = chars.peek() {
+                        if next_ch.is_uppercase() {
+                            result.push_str("\n\n");
+                            char_count_since_break = 0;
+                        } else {
+                            result.push(' ');
+                        }
+                    }
+                }
+            }
+        }
+        // Detect concatenated words: lowercase followed directly by uppercase
+        // This often indicates missing breaks between sections (e.g., "TestingIntroduction")
+        else if ch.is_lowercase() && char_count_since_break > 20 {
+            if let Some(&next_ch) = chars.peek() {
+                if next_ch.is_uppercase() {
+                    // Likely a section boundary, add paragraph break
+                    result.push_str("\n\n");
+                    char_count_since_break = 0;
+                }
+            }
+        } else if ch == '\n' {
+            char_count_since_break = 0;
+        }
+    }
+
+    result
 }
 
 #[cfg(test)]
