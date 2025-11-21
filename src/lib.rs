@@ -1,19 +1,20 @@
-use env_logger::Builder;
-use log::{LevelFilter, info};
-
 pub mod cli;
 pub mod config;
 pub mod error;
 pub mod markdown;
 pub mod pdf;
 
+mod dry_run;
+mod logging;
+
 use config::Config;
 use error::Result;
+use log::info;
 
 /// Main application entry point
 pub fn run(config: Config) -> Result<()> {
     // Initialize logging
-    init_logging(config.verbose);
+    logging::init_logging(config.verbose);
 
     info!("Starting pdf2md");
     info!("Input: {}", config.input_path.display());
@@ -29,7 +30,7 @@ pub fn run(config: Config) -> Result<()> {
 
     // Handle dry-run mode
     if config.dry_run {
-        return run_dry_run(&doc);
+        return dry_run::run_dry_run(&doc);
     }
 
     info!("Output: {}", config.output_path.display());
@@ -46,52 +47,6 @@ pub fn run(config: Config) -> Result<()> {
 
     info!("Conversion complete");
     Ok(())
-}
-
-/// Run in dry-run mode: preview PDF structure without converting
-fn run_dry_run(doc: &pdf::PdfDocument) -> Result<()> {
-    info!("Running in preview mode (dry-run)");
-
-    let metadata = doc.extract_metadata()?;
-
-    println!("\n=== PDF Preview ===");
-    println!("Pages: {}", metadata.page_count);
-
-    if let Some(title) = &metadata.title {
-        println!("Title: {}", title);
-    }
-
-    if let Some(author) = &metadata.author {
-        println!("Author: {}", author);
-    }
-
-    println!(
-        "Has extractable text: {}",
-        if metadata.has_text { "Yes" } else { "No" }
-    );
-
-    if !metadata.sections.is_empty() {
-        println!("\nDetected sections:");
-        for section in &metadata.sections {
-            println!("  • {}", section);
-        }
-    }
-
-    println!("\n=== End Preview ===\n");
-
-    Ok(())
-}
-
-/// Initialize logging based on verbosity level
-fn init_logging(verbose: bool) {
-    let level = if verbose {
-        LevelFilter::Info
-    } else {
-        LevelFilter::Error
-    };
-
-    // Use try_init to avoid panic if logger is already initialized (in tests)
-    let _ = Builder::new().filter_level(level).try_init();
 }
 
 #[cfg(test)]
@@ -162,17 +117,5 @@ mod tests {
 
         let result = run(config);
         assert!(result.is_err());
-    }
-
-    #[test]
-    fn test_init_logging_verbose() {
-        // This test just ensures init_logging doesn't panic
-        init_logging(true);
-    }
-
-    #[test]
-    fn test_init_logging_quiet() {
-        // This test just ensures init_logging doesn't panic
-        init_logging(false);
     }
 }
